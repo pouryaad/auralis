@@ -66,7 +66,7 @@ Schlüssel stehen nie in `sources.json` oder im Dashboard. Fehlt ein referenzier
 ## Sicherheit und Datenschutz
 
 - Keine Schlüssel im Browser. Kontaktpersonen aus Bekanntmachungen werden nicht übernommen.
-- Merkliste, Pipeline, Notizen und Profile bleiben im Browser des Nutzers (localStorage); der Feed liegt in IndexedDB. Es gibt kein Tracking.
+- Merkliste, Pipeline und Notizen bleiben im Browser des Nutzers (localStorage); der Feed liegt in IndexedDB. Es gibt kein Tracking.
 - CSV-Export schützt gegen Formel-Einschleusung (Zellen, die mit `= + - @` beginnen).
 - `serve.js`: nur GET/HEAD, Schutz gegen Pfad-Ausbruch, Sicherheits-Header inkl. Content-Security-Policy, gzip, `/healthz`. Docker läuft als Nicht-root-Benutzer.
 
@@ -85,7 +85,7 @@ Live geprüft am 14.10.2026 (Abruf über einen Browser mit Internetzugang, Ergeb
 - **Bekanntmachungsservice:** `/api/notice-exports?pubDay=YYYY-MM-DD&format=eforms.zip` (OpenAPI unter `/documentation/api/opendata`, Lizenz CC0). Ein Tag ≈ 3,6 MB mit ≈ 1.000 XML-Dateien. Es kommen zwei eForms-Varianten vor (eForms-DE 2.1 und ältere SDK-0.1-Dateien ohne Root-Erweiterung, Auftraggeber dann in `ContractingParty/Party`); beide werden gelesen (Test `cn-sdk01`).
 - Berichtigungen erscheinen als neue Bekanntmachung. Gleiche Quelle, Titel, Auftraggeber, Frist und Plattform-Link werden zur neuesten Fassung zusammengeführt (897 Einträge im Abzug).
 - `npm test`: 18 Tests (synthetische Daten plus Fixtures nach den Live-Funden), darunter ein Ende-zu-Ende-Lauf gegen lokale Mock-Server.
-- Dashboard: 65 Browsertests mit synthetischen Daten (Filter, Suche, Links, XSS-Schutz, CSV, Pipeline, Persistenz, Feed-Ausfall, 320–1440 px) und 14 Tests mit dem echten Feed (Medien, Bundesland, Österreich, „ohne Ortsangabe“, Suche < 200 ms, Links der Detailansicht, kein Überlauf, keine JS-Fehler).
+- Dashboard (Bereiche Übersicht, Ausschreibungen, Pipeline, Kalender, Quellen): 64 Browsertests mit synthetischen Daten (Filter, Suche, Links, XSS-Schutz, CSV, Pipeline, Persistenz, Bereinigung alter Browserdaten, Feed-Ausfall, 320–1440 px) und 14 Tests mit dem echten Feed (Medien, Bundesland, Österreich, „ohne Ortsangabe“, Suche < 200 ms, Links der Detailansicht, kein Überlauf, keine JS-Fehler).
 
 Bekannte Grenzen:
 
