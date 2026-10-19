@@ -1,5 +1,7 @@
 # Auralis – echte Ausschreibungen abrufen und anzeigen
 
+**Live:** https://pouryaad.github.io/auralis/ – wird stündlich von GitHub Actions aktualisiert (Workflow „Ausschreibungen aktualisieren“).
+
 Zwei Teile, keine Abhängigkeiten außer Node.js ab Version 18:
 
 1. **Abruf-Dienst** (`src/`, `sources.json`): holt offene Ausschreibungen aus offiziellen Quellen, vereinheitlicht sie und schreibt `public/data/tenders.json`. Jeder Eintrag enthält: Quelle, Link zur Originalbekanntmachung bzw. Vergabeplattform, Bewerbungslink (falls veröffentlicht), Frist (Angebots- oder Teilnahmefrist), Land, Bundesland, Kategorie (inkl. Medien), CPV-Codes, Auftragswert (falls angegeben).
@@ -89,7 +91,7 @@ Bekannte Grenzen:
 
 - Rund 11 % der Einträge (vor allem aus dem Bekanntmachungsservice) haben weder Erfüllungsort noch NUTS-Code des Auftraggebers. Sie stehen unter Bundesland „Ohne Angabe zum Ort“ und erscheinen bei „alle Bundesländer“.
 - Für Einträge aus dem Bekanntmachungsservice gibt es keinen dokumentierten Link auf die eigene Detailseite. „Ausschreibung öffnen“ führt zur Vergabeplattform aus der Bekanntmachung; Einträge ganz ohne Link werden ausgelassen.
-- `npm run check` lief hier nicht unter Node gegen die Live-Server (die Arbeitsumgebung hat keinen direkten Internetzugang). Dieselbe Logik lief im Browser; der erste Lauf auf deinem Server oder in GitHub Actions ist trotzdem der Abnahmetest.
+- Der Abruf läuft seit dem 20.10.2026 in GitHub Actions: TED erfolgreich (8.331 offene Ausschreibungen). Der Bekanntmachungsservice antwortete zu diesem Zeitpunkt auf alle Anfragen nach 60 s mit HTTP 504 (auch die Dokumentationsseite, auch von anderen Rechnern). Der Abruf behält dann die letzten Einträge (abgelaufene werden entfernt) und holt die Tagesexporte automatisch nach, sobald der Dienst wieder antwortet.
 
 ## Feed-Format (schema 1)
 
