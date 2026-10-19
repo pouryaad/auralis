@@ -1,0 +1,15 @@
+{
+  "name": "auralis-ingest",
+  "version": "1.1.0",
+  "description": "Ruft offene öffentliche Ausschreibungen (TED, Bekanntmachungsservice) aus offiziellen Quellen ab und schreibt public/data/tenders.json für das Auralis-Dashboard.",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "ingest": "node src/run.js",
+    "check": "node src/run.js --check",
+    "start": "node serve.js",
+    "daemon": "node serve.js --daemon",
+    "test": "node --test test/ingest.test.js"
+  },
+  "license": "MIT"
+}

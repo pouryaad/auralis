@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TESTDATEI: synthetisch, im Aufbau einer älteren eForms-Fassung (eforms-sdk-0.1) ohne Wurzel-Erweiterung, wie sie live im Bekanntmachungsservice vorkommt. -->
+<cn:ContractNotice xmlns:cn="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+ <cbc:UBLVersionID>2.3</cbc:UBLVersionID><cbc:CustomizationID>eforms-sdk-0.1</cbc:CustomizationID>
+ <cbc:ID>11111111-0000-0000-0000-000000000009</cbc:ID><cbc:ContractFolderID>folder-sdk01</cbc:ContractFolderID>
+ <cbc:IssueDate>2099-01-02+01:00</cbc:IssueDate><cbc:RegulatoryDomain>de-uvgo</cbc:RegulatoryDomain>
+ <cac:ContractingParty><cac:Party><cbc:WebsiteURI>https://www.teststadt.example</cbc:WebsiteURI><cac:PartyName><cbc:Name languageID="DEU">Landkreis Testland, Vergabestelle</cbc:Name></cac:PartyName>
+  <cac:PostalAddress><cbc:CityName>Teststadt</cbc:CityName><cbc:CountrySubentityCode listName="nuts">DEE0D</cbc:CountrySubentityCode><cac:Country><cbc:IdentificationCode>DEU</cbc:IdentificationCode></cac:Country></cac:PostalAddress>
+  <cac:ServiceProviderParty><cac:Party><cac:PartyName><cbc:Name>Dienstleister</cbc:Name></cac:PartyName><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">DEA22</cbc:CountrySubentityCode></cac:PostalAddress></cac:Party></cac:ServiceProviderParty>
+ </cac:Party></cac:ContractingParty>
+ <cac:ProcurementProject><cbc:Name languageID="DEU">Winterdienst 2099</cbc:Name><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">90620000</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject>
+ <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+  <cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria/></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions>
+   <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://plattform.test/tenderdetails.html?id=1</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference></cac:TenderingTerms>
+  <cac:TenderingProcess><cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2099-02-01+01:00</cbc:EndDate></cac:TenderSubmissionDeadlinePeriod></cac:TenderingProcess>
+ </cac:ProcurementProjectLot>
+</cn:ContractNotice>

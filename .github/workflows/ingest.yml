@@ -1,0 +1,40 @@
+# Holt stündlich Ausschreibungen und veröffentlicht Dashboard + Feed über GitHub Pages (ohne Commit-Flut im Repository).
+# Einmalig: Settings → Pages → Source: "GitHub Actions". Optional: Secrets CONTACT_EMAIL, COMMERCIAL_API_KEY.
+name: Ausschreibungen aktualisieren
+on:
+  schedule: [{ cron: '17 * * * *' }]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency: { group: ingest, cancel-in-progress: false }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Cache der Tagesexporte
+        uses: actions/cache@v4
+        with: { path: .cache, key: oev-${{ github.run_id }}, restore-keys: oev- }
+      - name: Vorherigen Feed laden (damit Einträge bei Quellenfehlern erhalten bleiben)
+        run: curl -fsSL "${{ steps.pages.outputs.base_url }}/data/tenders.json" -o public/data/tenders.json || true
+      - run: npm test
+      - run: node src/run.js
+        env:
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+          COMMERCIAL_API_KEY: ${{ secrets.COMMERCIAL_API_KEY }}
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: public }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.deployment.outputs.page_url }}' }
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

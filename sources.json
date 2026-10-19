@@ -1,0 +1,43 @@
+{
+  "sources": [
+    {
+      "id": "ted",
+      "type": "ted",
+      "name": "TED – Tenders Electronic Daily (EU)",
+      "homepage": "https://ted.europa.eu",
+      "coverage": "EU-weite Ausschreibungen oberhalb der Schwellenwerte",
+      "license": "Weiterverwendung gemäß Rechtshinweis von TED; Quelle „TED“ angeben",
+      "enabled": true
+    },
+    {
+      "id": "oev",
+      "type": "oev",
+      "name": "Bekanntmachungsservice (oeffentlichevergabe.de)",
+      "homepage": "https://oeffentlichevergabe.de",
+      "coverage": "Bund, Länder und Kommunen, auch unterschwellig",
+      "license": "Open-Data-Richtlinie des Bekanntmachungsservice; vor Betrieb prüfen",
+      "enabled": true
+    },
+    {
+      "id": "kommerziell",
+      "type": "generic-json",
+      "name": "Kommerzielle Quelle (Vorlage, deaktiviert)",
+      "homepage": "",
+      "license": "Gemäß Vertrag mit dem Anbieter",
+      "enabled": false,
+      "request": {
+        "url": "https://API-DES-ANBIETERS/v1/tenders",
+        "method": "GET",
+        "headers": { "Authorization": "Bearer ${COMMERCIAL_API_KEY}" },
+        "query": { "country": "DE", "status": "open" }
+      },
+      "pagination": { "pageParam": "page", "start": 1, "sizeParam": "per_page", "size": 100, "maxPages": 50 },
+      "itemsPath": "data",
+      "map": {
+        "id": "id", "title": "title", "buyer": "buyer.name", "published": "published_at",
+        "deadline": "deadline_at", "notice": "urls.notice", "apply": "urls.apply",
+        "region": "nuts_code", "cpv": "cpv_codes", "description": "summary", "value": "estimated_value"
+      }
+    }
+  ]
+}

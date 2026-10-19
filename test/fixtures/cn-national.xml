@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TESTDATEI (synthetisch, nach eForms-SDK-Struktur). Keine echte Bekanntmachung. -->
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
+  <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension>
+    <efac:Organizations>
+      <efac:Organization><efac:Company>
+        <cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification>
+        <cac:PartyName><cbc:Name languageID="DEU">Teststadt &amp; Kreis</cbc:Name></cac:PartyName>
+        <cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">DE212</cbc:CountrySubentityCode><cac:Country><cbc:IdentificationCode listName="country">DEU</cbc:IdentificationCode></cac:Country></cac:PostalAddress>
+      </efac:Company></efac:Organization>
+    </efac:Organizations>
+  </efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions>
+  <cbc:ID schemeName="notice-id">11111111-2222-3333-4444-555555555555</cbc:ID>
+  <cbc:ContractFolderID>aaaaaaaa-0000-0000-0000-000000000001</cbc:ContractFolderID>
+  <cbc:IssueDate>2099-01-02+01:00</cbc:IssueDate>
+  <cbc:RegulatoryDomain>other</cbc:RegulatoryDomain>
+  <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ContractingParty>
+  <cac:ProcurementProject>
+    <cbc:Name languageID="ENG">Image film</cbc:Name><cbc:Name languageID="DEU">Imagefilm-Produktion für das Rathaus</cbc:Name>
+    <cbc:Description languageID="DEU">Konzeption, Dreh und Schnitt.</cbc:Description>
+    <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">92111200</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">48000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+    <cac:TenderingTerms><cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://plattform.test/unterlagen/1</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
+      <cac:TenderRecipientParty><cbc:EndpointID>https://plattform.test/abgabe/1</cbc:EndpointID></cac:TenderRecipientParty></cac:TenderingTerms>
+    <cac:TenderingProcess><cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2099-02-15+01:00</cbc:EndDate><cbc:EndTime>10:00:00+01:00</cbc:EndTime></cac:TenderSubmissionDeadlinePeriod></cac:TenderingProcess>
+    <cac:ProcurementProject><cbc:Name languageID="DEU">Los 1</cbc:Name><cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">DEA23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation></cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</ContractNotice>
