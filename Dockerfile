@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY --chown=node:node . .
 RUN mkdir -p /app/.cache && chown node:node /app/.cache
