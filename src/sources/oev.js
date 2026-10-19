@@ -52,7 +52,7 @@ export async function fetchOev({ id = 'oev', env = process.env, log = console.lo
   const includeEu = env.OEV_INCLUDE_EU === '1';
   const today = todayIso(), warnings = [];
   if (cacheDir) await mkdir(cacheDir, { recursive: true }).catch(() => { warnings.push('Cache-Ordner nicht beschreibbar, Exporte werden jedes Mal neu geladen.'); cacheDir = null; });
-  let fmt = 'iso', okDays = 0, missing = 0, fetched = 0;
+  let fmt = 'iso', okDays = 0, missing = 0, fetched = 0, failedStart = 0;
   const byFolder = new Map();
   for (let i = days; i >= 1; i--) { // ältester Tag zuerst; heutiger Export ist meist noch nicht fertig
     const day = addDays(today, -i);
@@ -69,8 +69,9 @@ export async function fetchOev({ id = 'oev', env = process.env, log = console.lo
         }
         if (!events) {
           if (e.status === 404 || e.status === 204) { missing++; continue; }
-          if (okDays === 0 && i === days) throw Object.assign(e, { message: `Bekanntmachungsservice nicht erreichbar: ${e.message}${e.body ? ' – ' + e.body.slice(0, 200) : ''}` });
-          warnings.push(`Export ${day}: ${e.message}`); continue;
+          // Einzelne Tage (z. B. HTTP 504 bei noch nicht erzeugtem Export) überspringen; nur wenn die ersten drei Tage scheitern, gilt der Dienst als nicht erreichbar.
+          if (okDays === 0 && ++failedStart >= 3) throw Object.assign(e, { message: `Bekanntmachungsservice nicht erreichbar: ${e.message}${e.body ? ' – ' + e.body.slice(0, 200) : ''}` });
+          warnings.push(`Export ${day} übersprungen: ${e.message}`); await sleep(delay * 4); continue;
         }
       }
       if (cacheFile) await writeFile(cacheFile, JSON.stringify(events)).catch(() => {});

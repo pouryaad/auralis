@@ -160,6 +160,7 @@ test('Ende-zu-Ende: TED (Feldprüfung, Iteration, 500er, timedOut) + Bekanntmach
       if (u.pathname === '/fail') { res.writeHead(401); return res.end('nope'); }
       if (u.pathname === '/oev') {
         const day = u.searchParams.get('pubDay');
+        if (day === d(-5)) { res.writeHead(504); return res.end('Gateway Time-out'); } // live beobachtet am 20.10.2026
         if (day === d(-3)) { res.writeHead(200); return res.end(zip({ '1.xml': fresh(FIX), '2.xml': fresh(callB), '3.xml': fresh(eu) })); }
         if (day === d(-2)) { res.writeHead(200); return res.end(zip({ '4.xml': fresh(award) })); }
         res.writeHead(404); return res.end();
@@ -195,6 +196,7 @@ test('Ende-zu-Ende: TED (Feldprüfung, Iteration, 500er, timedOut) + Bekanntmach
   assert.equal(m.ted.status, 'ok', m.ted.error); assert.equal(m.ted.count, 11, 'abgelaufene TED-Zeile entfernt');
   assert.ok(m.ted.warnings.some((w) => /submission-url-lot/.test(w)), 'abgelehntes Feld gemeldet');
   assert.equal(m.oev.status, 'ok', m.oev.error);
+  assert.ok(m.oev.warnings.some((w) => /übersprungen.*504/.test(w)), 'einzelner 504-Tag übersprungen statt Quelle abgebrochen');
   const oev = feed.tenders.filter((t) => t.src === 'oev');
   assert.deepEqual(oev.map((t) => t.title), ['Imagefilm-Produktion für das Rathaus'], 'vergebene und EU-Bekanntmachungen ausgeschlossen');
   assert.equal(m.k.status, 'error'); assert.match(m.k.error, /401/); assert.equal(m.k.keptStale, 1);
